@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <!-- CSS Bootstrap  -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
+
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Challenge One</title>
+
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/modal.css">
+    <script src="js/main.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                            aria-controls="home" aria-selected="true">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                            aria-controls="profile" aria-selected="false">List</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+
+                        <h1>Adicionar Personagem</h1>
+                        <hr>
+                        <form class="needs-validation" target="frame" novalidate>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label for="name">Nome</label>
+                                    <input id="name" type="text" class="form-control" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label for="specie">Espécie</label>
+                                    <input id="specie" type="text" class="form-control" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label for="gender">Gênero</label>
+                                    <input id="gender" type="text" class="form-control" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="origem">Origem</label>
+                                    <input id="origem" type="text" class="form-control" required>
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label for="last-saw">Última aparição</label>
+                                    <input id="last-saw" type="text" class="form-control" required>
+                                </div>
+                            </div>
+
+
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label for="customFile">Selecione um avatar</label>
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="customFile" required>
+                                        <label class="custom-file-label" for="customFile">Choose file</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row btn-row">
+                                <button class="btn btn-danger">Cadastro Automático</button>
+                                <button class="btn btn-warning" type="submit">Apagar Tudo</button>
+                                <button class="btn btn-success" type="submit">Salvar</button>
+                            </div>
+                        </form>
+
+
+                    </div>
+
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="row">
+                            <div class="col" id="lista" class="list">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <form target="frame" id="edit-form">
+
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label for="name-edit">Nome</label>
+                                    <input id="name-edit" type="text" class="form-control" >
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label for="specie-edit">Espécie</label>
+                                    <input id="specie-edit" type="text" class="form-control" >
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label for="gender-edit">Gênero</label>
+                                    <input id="gender-edit" type="text" class="form-control" >
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label for="origem-edit">Origem</label>
+                                    <input id="origem-edit" type="text" class="form-control" >
+                                </div>
+
+                            
+                                <button onclick="editItem()" id="btn-edit" class="btn edit-btn col-12" href="#">Salvar</button>
+                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+    <iframe name="frame"></iframe>
+
+    <script src="js/delete.js"></script>
+    <script src="js/list.js"></script>
+
+    <script src="js/modal.js"></script>
+
+</body>
+
+</html>
